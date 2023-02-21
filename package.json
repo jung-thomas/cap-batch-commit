@@ -1,0 +1,30 @@
+{
+  "name": "cap-batch-commit",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "https://github.com/jung-thomas/cap-batch-commit",
+  "license": "Apache 2.0",
+  "private": false,
+  "dependencies": {
+    "@sap/cds": "^6",
+    "express": "^4",
+    "hdb": "^0.19",
+    "uuid": "^9.0"
+  },
+  "devDependencies": {
+    "@sap/hdi-deploy": "^4.5.3"
+  },
+  "scripts": {
+    "hana": "cds deploy --to hana:cap-batch-commit-db --auto-undeploy",
+    "watch": "cds watch --profile hybrid --livereload false",
+    "start": "cds run",
+    "load": "cds bind --exec node dataLoad.js"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "hana-cloud"
+      }
+    }
+  }
+}
