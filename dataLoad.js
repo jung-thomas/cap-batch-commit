@@ -84,7 +84,7 @@ async function init() {
             })
         }
     }
-
+    console.log(util.inspect(capData, { maxArrayLength: null, depth: 4 }))
     await db.run(INSERT.into(db.entities.headerLog).entries(capData))
     console.log(`Finished`)
     process.exit()
