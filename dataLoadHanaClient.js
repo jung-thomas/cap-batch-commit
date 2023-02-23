@@ -120,8 +120,10 @@ async function init() {
             }
         }
         console.log(util.inspect(headerData, { maxArrayLength: null, depth: 4 }))
-        let headerStatement = await db.prepare(db.conn, 'insert into HEADERLOG(ID, REFID, SENDERBUSSYSTEMID) VALUES(?, ?, ?)')
-        let itemStatement = await db.prepare(db.conn, 'insert into ITEMLOG(ID, HEADER_ID, TYPEID, SEVERITYCODE, NOTE, WEBURI) VALUES(?, ?, ?, ?, ?, ?)')
+        let [headerStatement, itemStatement] = await Promise.all([
+            db.prepare(db.conn, 'insert into HEADERLOG(ID, REFID, SENDERBUSSYSTEMID) VALUES(?, ?, ?)'),
+            db.prepare(db.conn, 'insert into ITEMLOG(ID, HEADER_ID, TYPEID, SEVERITYCODE, NOTE, WEBURI) VALUES(?, ?, ?, ?, ?, ?)')
+        ]) 
         await Promise.all([
             db.executeBatch(headerStatement, headerData),
             db.executeBatch(itemStatement, itemData)
