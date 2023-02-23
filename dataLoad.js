@@ -1,8 +1,11 @@
-const cds = require('@sap/cds')
-const uuid = require('uuid')
-const path = require('path')
+//const cds = require('@sap/cds')
+import cds from '@sap/cds'
+import * as uuid from 'uuid'
+import * as path from 'path'
+import { fileURLToPath } from 'url'
+const __dirname = fileURLToPath(new URL('.', import.meta.url)) 
 global.__base = __dirname + "/"
-const util = require('util')
+import util from 'util'
 
 async function clearDB(db) {
     console.log(`Clearing existing DB tables`)
